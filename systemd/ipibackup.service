@@ -11,21 +11,21 @@ Type=oneshot
 # ExecStartPre=/bin/sleep 1
 ExecStartPre=/bin/sleep 10
 # Give some feedback about what happens
-ExecStartPre=/bin/sh -c "(echo -n start:; date -R) > /home/pi/iphone/status"
+ExecStartPre=/bin/sh -c "(echo -n start:; date -R) > /volume1/Raspberry/iphone/status"
 # Needs the raspi-gpio package
 ExecStartPre=+-/usr/bin/raspi-gpio set 18 op
 ExecStartPre=+-/usr/bin/raspi-gpio set 18 dh
 # Make sure the destination folder exists
-ExecStartPre=/bin/mkdir -p /home/pi/iphone
+ExecStartPre=/bin/mkdir -p /volume1/Raspberry/iphone
 
 # Run the backup itself
-ExecStart=/usr/bin/idevicebackup2 backup /home/pi/iphone
+ExecStart=/usr/bin/idevicebackup2 backup /volume1/Raspberry/iphone
 
 # Feedback again
-ExecStartPost=/bin/sh -c "(echo -n success:; date -R) >> /home/pi/iphone/status"
+ExecStartPost=/bin/sh -c "(echo -n success:; date -R) >> /volume1/Raspberry/iphone/status"
 ExecStartPost=+-/usr/bin/raspi-gpio set 18 dl
 # Unfortunately never called if backup fails
-ExecStopPost=/bin/sh -c "(echo -n stop:; date -R) >> /home/pi/iphone/status"
+ExecStopPost=/bin/sh -c "(echo -n stop:; date -R) >> /volume1/Raspberry/iphone/status"
 
 # Hardening
 PrivateTmp=true
@@ -48,7 +48,7 @@ RestrictRealtime=true
 LockPersonality=true
 SystemCallFilter=~@mount
 User=pi
-ReadWritePaths=/home/pi/iphone
+ReadWritePaths=/volume1/Raspberry/iphone
 
 [Install]
 WantedBy=usbmuxd.service

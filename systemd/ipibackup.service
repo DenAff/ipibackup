@@ -8,7 +8,8 @@ After=usbmuxd.service
 [Service]
 Type=oneshot
 # Sometimes usbmux is not completely ready so force a delay. I know it's ugly
-ExecStartPre=/bin/sleep 1
+# ExecStartPre=/bin/sleep 1
+ExecStartPre=/bin/sleep 10
 # Give some feedback about what happens
 ExecStartPre=/bin/sh -c "(echo -n start:; date -R) > /home/pi/iphone/status"
 # Needs the raspi-gpio package

@@ -19,7 +19,7 @@ ExecStartPre=+-/usr/bin/raspi-gpio set 18 dh
 ExecStartPre=/bin/mkdir -p /mnt/Raspberry/iphone
 
 # Run the backup itself
-ExecStart=/usr/bin/idevicebackup2 backup /volume1/Raspberry/iphone
+ExecStart=/usr/bin/idevicebackup2 backup /mnt/Raspberry/iphone
 
 # Feedback again
 ExecStartPost=/bin/sh -c "(echo -n success:; date -R) >> /mnt/Raspberry/iphone/status"
